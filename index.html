@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoVision | DSA Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="#" class="logo">Algo<span>Vision</span></a>
+        <nav>
+            <a href="#visualizer">Visualizer</a>
+            <a href="#code-section">Python Code</a>
+            <a href="#complexity">Complexity</a>
+        </nav>
+        <span class="status"><span class="status-dot"></span> Interactive Learning</span>
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+            <p class="eyebrow">LEARN · VISUALIZE · MASTER</p>
+            <h1>Understand DSA.<br><span>One step at a time.</span></h1>
+            <p class="hero-text">
+                Explore algorithms through interactive visualizations,
+                Python code, and simple explanations.
+            </p>
+        </section>
+
+        <section class="workspace" id="visualizer">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">YOUR PLAYGROUND</p>
+                    <h2>Algorithm Visualizer</h2>
+                </div>
+                <span class="live-label">LIVE DEMO</span>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="algorithm">Select algorithm</label>
+                    <select id="algorithm">
+                        <optgroup label="Sorting Algorithms">
+                            <option value="bubble">Bubble Sort</option>
+                            <option value="selection">Selection Sort</option>
+                            <option value="insertion">Insertion Sort</option>
+                            <option value="merge">Merge Sort</option>
+                            <option value="quick">Quick Sort</option>
+                        </optgroup>
+                        <optgroup label="Searching Algorithms">
+                            <option value="linear">Linear Search</option>
+                            <option value="binary">Binary Search</option>
+                            <option value="jump">Jump Search</option>
+                            <option value="interpolation">Interpolation Search</option>
+                            <option value="exponential">Exponential Search</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="control-group array-input-group">
+                    <label for="arrayInput">Array values (comma-separated)</label>
+                    <input id="arrayInput" type="text"
+                           value="42, 18, 65, 9, 31, 74, 26, 53"
+                           maxlength="250">
+                </div>
+
+                <div class="control-group target-group" id="targetGroup">
+                    <label for="targetInput">Search target</label>
+                    <input id="targetInput" type="number" value="31">
+                </div>
+
+                <div class="control-group">
+                    <label for="language">Explanation language</label>
+                    <select id="language">
+                        <option value="en">English</option>
+                        <option value="hi">Hinglish</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" id="runBtn">▶ Visualize</button>
+                    <button class="btn btn-secondary" id="randomBtn">↻ Random</button>
+                </div>
+            </div>
+
+            <p class="notice" id="notice">
+                Choose an algorithm and press Visualize to begin.
+            </p>
+
+            <div class="visualization-card">
+                <div class="visualization-top">
+                    <div>
+                        <h3 id="visualTitle">Bubble Sort</h3>
+                        <p id="visualSubtitle">Watch the values move into order.</p>
+                    </div>
+                    <div class="legend">
+                        <span><i class="legend-dot comparing"></i> Comparing</span>
+                        <span><i class="legend-dot sorted"></i> Sorted / Found</span>
+                    </div>
+                </div>
+
+                <div class="bars" id="bars" aria-label="Array visualization"></div>
+
+                <div class="step-message" id="stepMessage" aria-live="polite">
+                    Ready to visualize your algorithm.
+                </div>
+
+                <div class="playback">
+                    <button class="btn btn-secondary" id="previousBtn">← Previous</button>
+                    <button class="btn btn-primary" id="playBtn">▶ Play</button>
+                    <button class="btn btn-secondary" id="nextBtn">Next →</button>
+                    <button class="btn btn-secondary" id="resetBtn">↺ Reset</button>
+                </div>
+
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="step-count" id="stepCount">Step 1 of 1</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Comparisons</span>
+                    <strong id="comparisons">0</strong>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Swaps</span>
+                    <strong id="swaps">0</strong>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Array writes</span>
+                    <strong id="writes">0</strong>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Elapsed time</span>
+                    <strong id="elapsed">0.00 ms</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="lower-grid">
+
+            <div class="panel" id="code-section">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">UNDER THE HOOD</p>
+                        <h2>Python Implementation</h2>
+                    </div>
+                    <span class="language-tag">PYTHON</span>
+                </div>
+                <p class="panel-description">
+                    This is the Python version of the selected algorithm.
+                </p>
+                <pre class="code-block"><code id="pythonCode"></code></pre>
+                <p class="code-note">
+                    The code shown here is Python. The interactive visualization
+                    itself runs in JavaScript in your browser.
+                </p>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">LEARN THE LOGIC</p>
+                        <h2>Step Explanation</h2>
+                    </div>
+                </div>
+                <div class="explanation-box">
+                    <span class="explanation-icon">✦</span>
+                    <p id="explanation">
+                        Choose an algorithm to explore its logic.
+                    </p>
+                </div>
+
+                <div class="complexity" id="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <div class="complexity-row">
+                        <span>Best case</span>
+                        <code id="bestCase">O(n)</code>
+                    </div>
+                    <div class="complexity-row">
+                        <span>Average case</span>
+                        <code id="averageCase">O(n²)</code>
+                    </div>
+                    <div class="complexity-row">
+                        <span>Worst case</span>
+                        <code id="worstCase">O(n²)</code>
+                    </div>
+                    <div class="complexity-row">
+                        <span>Space</span>
+                        <code id="spaceCase">O(1)</code>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <footer>
+            <a href="#" class="logo">Algo<span>Vision</span></a>
+            <p>Making Data Structures & Algorithms easier to understand.</p>
+            <p class="footer-small">Built for learners, by learners.</p>
+        </footer>
+
+    </main>
+
+</body>
+</html>
